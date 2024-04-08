@@ -113,4 +113,18 @@ body{
   color: #333;
 }
 
+.detail-container {
+text-align: center;
+margin: 5%;
+}
+
+.image-container{
+  width: 500px;
+  height: 600px;
+}
+
+
+
+
+
 

@@ -6,9 +6,9 @@ import logo from './images/iLearn.jpg'
 export default function Header() {
   return (
     <>
-    <header class="head">
+    <header className="head">
         <img src={logo} width="100px" height="80px" alt="iLearn"/>
-        <ul class="tab">
+        <ul className="tab">
             <li><Link to="/">Home</Link></li>
             <li> <Link to="about-us">About Us</Link></li>
             <li><Link to="contact">Contact Us</Link></li>
