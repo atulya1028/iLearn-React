@@ -7,10 +7,12 @@ import Contact from './pages/Contact';
 import Business from './pages/Business';
 import DetailsPage from './pages/DetailsPage';
 import Layout from './pages/Layout';
+import { Login } from './Login';
 
 function App() {
   return (
-    <BrowserRouter>
+    <>
+        <BrowserRouter>
       <Routes>
         <Route
           path="/"
@@ -24,10 +26,12 @@ function App() {
           <Route path="/about-us" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/business" element={<Business />} />
+          <Route path='/login' element={<Login/>}/>
         </Route>
         <Route path="/details/:id" element={<DetailsPage />} />
       </Routes>
     </BrowserRouter>
+    </>
   );
 }
 
