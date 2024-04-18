@@ -1,23 +1,25 @@
 import React from "react";
+import '../App.css'
 
 export default function About() {
   return (
     <>
-      <div>
+      <div className="bg-img">
         <div style={{ height: "50px" }}></div>
         <p
           style={{
             padding: "30px 30px",
             textAlign: "justify",
-            fontFamily: "Times-New-Roman",
+            fontFamily: "Dancing Script",
             fontWeight:'bold',
-            fontSize: "25px",
+            fontSize: "40px",
+            color:'white',
           }}
         >
-          iLearn is an e-book website where readers can read different types of
+          <p>iLearn is an e-book website where readers can read different types of
           books. It was created by Atulya Agrawal who is passionate about
           creating different things while exploring each one feel like they are
-          in the library.
+          in the library.</p>
           <br />
           <br />
           As readers face difficulties while they are not getting their favorite

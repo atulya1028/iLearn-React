@@ -7,7 +7,7 @@ import Contact from './pages/Contact';
 import Business from './pages/Business';
 import DetailsPage from './pages/DetailsPage';
 import Layout from './pages/Layout';
-import { Login } from './Login';
+import { Login } from './pages/Login';
 
 function App() {
   return (

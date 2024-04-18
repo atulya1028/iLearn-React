@@ -41,6 +41,26 @@ body{
   margin: 0;
   height: 100%;
 }
+
+.bg-img::before {
+  content: "" !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-image: url(images/bg.png) !important;
+  opacity: 0.7 !important; /* Adjust the opacity value as needed */
+  z-index: -1 !important; /* Ensure the pseudo-element stays behind other content */
+}
+
+.bg-img {
+  margin: 0 !important;
+  height: 100% !important;
+  /* Remove or adjust the background-image property from here */
+}
+
+
 .head{
   width:  100%;
   height: 80px;
@@ -90,6 +110,12 @@ body{
   padding-bottom: 20px;
   background-color: #E2DCDE;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-left: 20px;
+  margin-right: 20px;
+  gap: 20px;
 }
 
 .post{
@@ -102,25 +128,35 @@ body{
 
 
 
-.special-button{
+.special-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px; /* Fixed width */
+  height: 50px; /* Fixed height */
   background-color: black;
   color: white;
   border-radius: 10px;
   outline: none;
   border: none;
-  padding: 20px;
   font-size: 15px;
+  margin: auto;
 }
 
 .book-list {
   display: flex;
   list-style: none;
   flex-wrap: wrap;
-  gap: 150px;
+  gap: 50px;
   justify-content: flex-start;
   align-items: center;
   padding-left: 50px;
   padding-right: 50px;
+}
+
+.box-card{
+  width: 250px;
+  height: 50px;
 }
 
 .box-card:hover{
@@ -190,11 +226,11 @@ margin: 5%;
 }
 
 .container{
-  margin-top: 10%;
-  background-color: #e9edc9;
+  margin-top: 15%;
   border-radius: 10px;
   padding: 20px;
-  width: 100% !important;
+  background-color: #ccd5ae;
+  width: 30% !important;
 }
 input{
   width: 100%;
@@ -242,11 +278,11 @@ input:focus{
   align-items: center;
   font-style: italic;
   text-align:center;
+  font-family: "whisper";
+  font-size: "35px";
+  font-weight: "bold",
 }
-.parentDev{
-  margin-left: 20px;
-  margin-right: 20px;
-}
+
 
 .container-fluid{
   max-height: 100vh; /* Set a maximum height for the container */
@@ -264,5 +300,57 @@ input:focus{
     max-width: none; /* Remove the max-width limit for larger screens */
   }
 }
+
+.poster-img{
+  width: 20%;
+}
+
+.slogan{
+  width: 50%;
+  font-size: 30px;
+}
+
+.parentDev{
+  margin-left: 20px !important;
+  margin-right: 20px !important;
+  background-color: #ccd5ae !important;
+}
+
+.card-image{
+  width: 250px;
+  height: 250px;
+}
+
+.sidebar{
+  position: 'fixed';
+  top: '6.7%';
+  left: 0;
+  width: '-250px'; 
+  height: '100vh';
+  transition: 'left 0.3s ease-in-out';
+  background-color:'transparent';
+  gap:'100px';
+}
+
+.sidebar.visible{
+  left: 0;
+}
+
+.menu{
+  color: blue;
+}
+
+.MuiDrawer-paper {
+  width: 250px;
+}
+
+.MuiListItem-root {
+  color: #333; /* Adjust text color as needed */
+}
+
+.MuiListItemIcon-root {
+  min-width: 40px;
+}
+
 
 

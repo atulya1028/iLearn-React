@@ -7,6 +7,19 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 export default function Home() {
   const [booksData, setBooksData] = useState([]);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 576);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 576);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,64 +37,84 @@ export default function Home() {
       }
     };
     fetchData();
-    console.log('Width: ',window.innerWidth);
+    console.log("Width: ", window.innerWidth);
   }, []);
 
   return (
     <>
       <div>
         <div style={{ paddingTop: "50px" }} />
-         <span className="search-holder">
-         <input
+        <span className="search-holder">
+          <input
             type="text"
             className="search-box"
             placeholder="Search by books, author or title"
           />
-        <button className="searchBtn"> <FontAwesomeIcon icon={faSearch} /></button>
-         </span>
+          <button className="searchBtn">
+            {" "}
+            <FontAwesomeIcon icon={faSearch} />
+          </button>
+        </span>
         <div style={{ paddingTop: "20px" }} />
         <div className="banner">
-         <div className="container-fluid">
-          <div className="row">
-            <div className="col-md-12">
-            <div className="post">
+          <div className="container-fluid">
             <div
+              className="row"
               style={{
-                fontFamily: "Pacifico",
-                fontSize: '20px',
-                fontWeight: "bold",
-                color: "#0077b6",
-                textAlign:'justify'
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                gap: "10px",
               }}
             >
-             <div className="row">
-              <div className="col-12">
-              We sell book and attract people with different thinkings while
-              reading
+              <div className="post">
+                <div
+                  style={{
+                    fontFamily: "Pacifico",
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                    color: "#0077b6",
+                    textAlign: "justify",
+                  }}
+                >
+                  {isMobile ? (
+                    <div style={{ width: "70%" }}>
+                      We sell book and attract people with different thinkings
+                      while reading
+                    </div>
+                  ) : (
+                    <div style={{ width: "50%",fontSize:'35px'}}>
+                      We sell book and attract people with different thinkings
+                      while reading
+                    </div>
+                  )}
+                </div>
+                {isMobile ? (
+                  <img
+                    src={reading}
+                    alt=""
+                    width="50%"
+                    height="70%"
+                    style={{ borderRadius: "10px" }}
+                  />
+                ) : (
+                  <img
+                    src={reading}
+                    alt=""
+                    width="15%"
+                    height="70%"
+                    style={{ borderRadius: "10px" }}
+                  />
+                )}
+                
               </div>
-             </div>
-            </div>
-            &nbsp;
-            <img className="col-5"
-              src={reading}
-              alt=""
-              width= {window.innerWidth >576 ? 300 :200}
-              height={window.innerWidth >576 ? 300 :200}
-              style={{ borderRadius: "5px" }}
-            />
-            &nbsp;
-            <button
-              className="special-button col-4"
-              onClick={() => console.log("special")}
-            >
-              Special for you
-            </button>
-          </div>
+              <div><button className="special-button">Special for you</button></div>
             </div>
           </div>
-         </div>
         </div>
-        <h1>Best Selling Books</h1>
+        <h1 style={{ marginLeft: "20px", marginTop: "50px" }}>
+          Best Selling Books
+        </h1>
         <div style={{ paddingTop: "50px" }} />
         <ul className="book-list">
           {booksData.map((book) => (
@@ -91,7 +124,7 @@ export default function Home() {
                   <Card.Img
                     src={`http://localhost:3000/${book.image}`}
                     alt={book.title}
-                    style={{ width: "300px", height: "400px" }}
+                    className="card-image"
                   />
                   <Card.Body>
                     <Card.Title
