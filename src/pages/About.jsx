@@ -12,7 +12,7 @@ export default function About() {
             textAlign: "justify",
             fontFamily: "Dancing Script",
             fontWeight:'bold',
-            fontSize: "40px",
+            fontSize: "25px",
             color:'white',
           }}
         >

@@ -4,6 +4,7 @@ import logo from "../images/iLearn.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import SideBars from "./SideBars";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -78,6 +79,7 @@ const Header = () => {
               <Link to="business">Business</Link>
             </li>
           </ul>
+          <FontAwesomeIcon icon={faSearch}/>
           <Link to="/login">
             <button className="login-register">Login/Register</button>
           </Link>

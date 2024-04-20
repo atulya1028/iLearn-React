@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import reading from "../images/reading.jpg";
+import books from "../images/books.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-
+import { faCircleRight } from "@fortawesome/free-solid-svg-icons";
+import "../styles/Home.css";
 export default function Home() {
   const [booksData, setBooksData] = useState([]);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 576);
+
+  const [showMore,setShowMore] = useState(false);
+
+  const toggleShowMore = ()=>{
+    setShowMore(!showMore);
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -42,82 +48,98 @@ export default function Home() {
 
   return (
     <>
-      <div>
-        <div style={{ paddingTop: "50px" }} />
-        <span className="search-holder">
-          <input
-            type="text"
-            className="search-box"
-            placeholder="Search by books, author or title"
-          />
-          <button className="searchBtn">
-            {" "}
-            <FontAwesomeIcon icon={faSearch} />
-          </button>
-        </span>
-        <div style={{ paddingTop: "20px" }} />
+      <div className="background-container">
         <div className="banner">
-          <div className="container-fluid">
-            <div
-              className="row"
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                gap: "10px",
-              }}
-            >
-              <div className="post">
-                <div
-                  style={{
-                    fontFamily: "Pacifico",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                    color: "#0077b6",
-                    textAlign: "justify",
-                  }}
-                >
-                  {isMobile ? (
-                    <div style={{ width: "70%" }}>
-                      We sell book and attract people with different thinkings
-                      while reading
-                    </div>
-                  ) : (
-                    <div style={{ width: "50%",fontSize:'35px'}}>
-                      We sell book and attract people with different thinkings
-                      while reading
-                    </div>
-                  )}
-                </div>
-                {isMobile ? (
-                  <img
-                    src={reading}
-                    alt=""
-                    width="50%"
-                    height="70%"
-                    style={{ borderRadius: "10px" }}
-                  />
-                ) : (
-                  <img
-                    src={reading}
-                    alt=""
-                    width="15%"
-                    height="70%"
-                    style={{ borderRadius: "10px" }}
-                  />
-                )}
-                
-              </div>
-              <div><button className="special-button">Special for you</button></div>
-            </div>
+          <div className="device-container">
+            {isMobile ? (
+              <p className="mobile-container">
+                Discover diverse perspectives and ideas through our curated
+                collection of books. We invite you to explore new worlds,
+                challenge your thoughts, and connect with others through the
+                transformative power of books.
+              </p>
+            ) : (
+              <p className="notebook-container">
+                Discover diverse perspectives and ideas through our curated
+                collection of books. We invite you to explore new worlds,
+                challenge your thoughts, and connect with others through the
+                transformative power of books.
+              </p>
+            )}
+            {isMobile ? (
+              <button className="m-special-button">
+                Special for you{" "}
+                <FontAwesomeIcon
+                  icon={faCircleRight}
+                  size="1.5x"
+                  color="green"
+                />
+              </button>
+            ) : (
+              <button className="special-button">
+                Special for you{" "}
+                <FontAwesomeIcon
+                  icon={faCircleRight}
+                  size="1.5x"
+                  color="green"
+                />
+              </button>
+            )}
+          </div>
+          {isMobile ? (
+            <img src={books} alt="books" className="mobile-img" />
+          ) : (
+            <img src={books} alt="books" className="notebook-img" />
+          )}
+        </div>
+
+        <div className="heading">
+          <h1>Best Selling Books</h1>
+          <div style={{color:'blue',fontWeight:'bold'}} onClick={toggleShowMore}>
+            {showMore ? "View Less" : 'View More'}
           </div>
         </div>
-        <h1 style={{ marginLeft: "20px", marginTop: "50px" }}>
-          Best Selling Books
-        </h1>
+        <hr style={{marginLeft:'20px',marginRight:'20px'}}/>
         <div style={{ paddingTop: "50px" }} />
+        {showMore ? 
         <ul className="book-list">
           {booksData.map((book) => (
+            <li key={book._id}>
+              <Link to={`/details/${book._id}`}>
+                <Card className="box-card">
+                  <Card.Img
+                    src={`http://localhost:3000/${book.image}`}
+                    alt={book.title}
+                    className="card-image"
+                  />
+                  <Card.Body> 
+                    <Card.Title
+                      style={{
+                        fontSize: "12px",
+                        textAlign: "center",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {book.title}
+                    </Card.Title>
+                    <Card.Title
+                      style={{
+                        fontSize: "12px",
+                        textAlign: "center",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {book.author}
+                    </Card.Title>
+                  </Card.Body>
+                </Card>
+              </Link>
+            </li>
+          ))}
+        </ul> 
+        :
+         <ul className="book-list">
+          {booksData.slice(0,4).map((book) => (
             <li key={book._id}>
               <Link to={`/details/${book._id}`}>
                 <Card className="box-card">
@@ -150,7 +172,7 @@ export default function Home() {
               </Link>
             </li>
           ))}
-        </ul>
+        </ul>}
       </div>
     </>
   );

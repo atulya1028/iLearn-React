@@ -39,7 +39,7 @@
 
 body{
   margin: 0;
-  height: 100%;
+  height: 100vh;
 }
 
 .bg-img::before {
@@ -106,48 +106,59 @@ body{
 }
 
 .banner{
-  padding-top: 20px;
-  padding-bottom: 20px;
-  background-color: #E2DCDE;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  margin-left: 20px;
-  margin-right: 20px;
-  gap: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    margin-left: 20px;
+    margin-right: 20px;
+    gap: 20px;
+    padding: 20px;
 }
 
-.post{
+/* .post{
   padding: 20px;
   font-size: 25px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-}
+} */
 
 
 
 .special-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 200px; /* Fixed width */
-  height: 50px; /* Fixed height */
-  background-color: black;
-  color: white;
+  background-color: transparent;
+  color: black;
   border-radius: 10px;
   outline: none;
-  border: none;
-  font-size: 15px;
+  border-radius: 20px;
+  border: 1px solid black;
+  font-size: 30px;
   margin: auto;
+  padding: 20px;
+  margin: auto; 
+}
+
+.m-special-button {
+  background-color: transparent;
+  color: black;
+  border-radius: 10px;
+  outline: none;
+  border-radius: 20px;
+  border: 1px solid black;
+  font-size: 20px;
+  margin: auto;
+  padding: 10px;
+  margin: "auto" 
 }
 
 .book-list {
   display: flex;
   list-style: none;
   flex-wrap: wrap;
-  gap: 50px;
+  gap: 100px;
   justify-content: flex-start;
   align-items: center;
   padding-left: 50px;
@@ -188,8 +199,8 @@ margin: 5%;
 }
 
 .image-container{
-  width: 500px;
-  height: 600px;
+  width: 300px;
+  height: 300px;
 }
 .login-register{
   border-radius: 10px;
@@ -351,6 +362,7 @@ input:focus{
 .MuiListItemIcon-root {
   min-width: 40px;
 }
+
 
 
 
