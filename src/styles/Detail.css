@@ -1,0 +1,103 @@
+.detail-container {
+height: 100vh;
+background-color: #fefae0;
+padding-top: 100px;
+padding-left: 100px;
+padding-right: 100px;
+}
+
+.detail-image{
+    width: 300px;
+    height: 400px;
+}
+
+.block{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: start;
+    gap: 10px;
+}
+
+.title{
+    color: blue;
+     font-weight: bold;
+}
+.author{
+    color: grey;
+     font-weight: bold;
+}
+
+.sub-block{
+    padding: 20px;
+    width: 40%;
+}
+
+.block2{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.block3{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+.drop-down{
+    background-color: black;
+    border: 1px solid black;
+    width: 100px;
+    height: 50px;
+    color: white;
+    font-size: 20px;
+    box-shadow: none;
+}
+.drop-down:focus{
+    outline: none;
+    border: none;
+}
+.btn-setting{
+margin-top: 20px;
+}
+
+.btn-handle{
+    gap: 20px;
+    display: flex;
+}
+
+.cart-btn{
+    padding: 10px;
+    background-color: black;
+    color: white;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.buy-btn{
+    padding: 10px;
+    background-color: transparent;
+    color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.desc-setting{
+    margin-top: 30px;
+}
+
+.desc{
+    display: flex;
+    gap: 5px;
+}
+
+.read{
+    color: blue;
+    text-decoration: underline;
+    font-weight: bold;
+}
