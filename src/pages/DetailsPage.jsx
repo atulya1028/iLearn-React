@@ -11,7 +11,7 @@ const BookDetails = () => {
 
   const [book, setBook] = useState(null);
 
-  const apiUrl = `http://localhost:3000/api/books/${param.id}`;
+  const apiUrl = `https://stunning-narwhal-c76f9e.netlify.app/${param.id}`;
 
   const [selectedValue, setSelectedValue] = useState("");
 
@@ -42,7 +42,7 @@ const BookDetails = () => {
           <div className="detail-container">
             <div className="block">
               <img
-                src={`http://localhost:3000/${book.image}`}
+                src={`https://stunning-narwhal-c76f9e.netlify.app/${book.image}`}
                 alt={book.title}
                 className="detail-image"
               />

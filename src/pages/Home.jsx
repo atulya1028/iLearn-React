@@ -31,7 +31,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/books");
+        const response = await fetch("https://stunning-narwhal-c76f9e.netlify.app/api/books");
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
@@ -109,7 +109,7 @@ export default function Home() {
               <Link to={`/details/${book._id}`}>
                 <Card className="box-card">
                   <Card.Img
-                    src={`http://localhost:3000/${book.image}`}
+                    src={`https://stunning-narwhal-c76f9e.netlify.app/${book.image}`}
                     alt={book.title}
                     className="card-image"
                   />
@@ -145,7 +145,7 @@ export default function Home() {
               <Link to={`/details/${book._id}`}>
                 <Card className="box-card">
                   <Card.Img
-                    src={`http://localhost:3000/${book.image}`}
+                    src={`https://stunning-narwhal-c76f9e.netlify.app/${book.image}`}
                     alt={book.title}
                     className="card-image"
                   />
