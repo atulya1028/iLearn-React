@@ -40,24 +40,22 @@
 body{
   margin: 0;
   height: 100vh;
+  background-color: #fefae0;
 }
 
-.bg-img::before {
-  content: "" !important;
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  background-image: url(images/bg.png) !important;
-  opacity: 0.7 !important; /* Adjust the opacity value as needed */
-  z-index: -1 !important; /* Ensure the pseudo-element stays behind other content */
+.nav-container{
+  background-color: #fefae0;
+  height: 100vh;
+  overflow-y: auto;
 }
 
-.bg-img {
-  margin: 0 !important;
-  height: 100% !important;
-  /* Remove or adjust the background-image property from here */
+.nav-para{
+  padding: 30px 30px;
+  text-align: justify;
+  font-family: "Dancing Script";
+  font-weight:bold;
+  font-size: 25px;
+  color:#1b4965;
 }
 
 
@@ -175,24 +173,6 @@ body{
   border: none;
   outline: none;
 }
-
-.about-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f7f7f7;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: flex-start; /* Adjusted from 'start' to 'flex-start' */
-}
-
-.about-container p {
-  font-size: 16px;
-  line-height: 1.5;
-  color: #333;
-}
-
 
 .image-container{
   width: 300px;

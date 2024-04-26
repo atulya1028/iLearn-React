@@ -1,21 +1,14 @@
 import React from "react";
-import '../App.css'
+import '../App.css';
+import Lottie from "lottie-react";
+import ai from '../assets/ai.json';
 
 export default function About() {
   return (
     <>
-      <div className="bg-img">
+      <div className="nav-container">
         <div style={{ height: "50px" }}></div>
-        <p
-          style={{
-            padding: "30px 30px",
-            textAlign: "justify",
-            fontFamily: "Dancing Script",
-            fontWeight:'bold',
-            fontSize: "25px",
-            color:'white',
-          }}
-        >
+        <p className="nav-para">
           <p>iLearn is an e-book website where readers can read different types of
           books. It was created by Atulya Agrawal who is passionate about
           creating different things while exploring each one feel like they are
@@ -33,6 +26,9 @@ export default function About() {
           online and can listen to audio and video books also provides some fun
           games for little kids.
         </p>
+        <div style={{width:'50%',margin:'auto'}}>
+     <Lottie animationData={ai} />
+     </div>
       </div>
     </>
   );

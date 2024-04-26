@@ -5,6 +5,7 @@ import books from "../images/books.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleRight } from "@fortawesome/free-solid-svg-icons";
 import "../styles/Home.css";
+
 export default function Home() {
   const [booksData, setBooksData] = useState([]);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 576);
@@ -48,7 +49,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="background-container">
+      <div className="nav-container">
         <div className="banner">
           <div className="device-container">
             {isMobile ? (
@@ -95,12 +96,12 @@ export default function Home() {
 
         <div className="heading">
           <h1>Best Selling Books</h1>
-          <div style={{color:'blue',fontWeight:'bold'}} onClick={toggleShowMore}>
+          <div style={{color:'blue',fontWeight:'bold'}} onClick={toggleShowMore} className="view">
             {showMore ? "View Less" : 'View More'}
           </div>
         </div>
         <hr style={{marginLeft:'20px',marginRight:'20px'}}/>
-        <div style={{ paddingTop: "50px" }} />
+        <div style={{ paddingTop: "50px"}} />
         {showMore ? 
         <ul className="book-list">
           {booksData.map((book) => (

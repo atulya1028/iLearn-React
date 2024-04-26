@@ -3,13 +3,16 @@ import './App.css';
 import { BrowserRouter, Route, Routes, Outlet } from 'react-router-dom'; // Import Outlet from react-router-dom
 import Home from './pages/Home';
 import About from './pages/About';
-import Contact from './pages/Contact';
 import Business from './pages/Business';
 import DetailsPage from './pages/DetailsPage';
 import Layout from './pages/Layout';
 import { Login } from './pages/Login';
+import { Footer } from './pages/Footer';
+import { Cart } from './pages/Cart';
 
 function App() {
+
+
   return (
     <>
         <BrowserRouter>
@@ -24,12 +27,13 @@ function App() {
         >
           <Route path="/" element={<Home />} />
           <Route path="/about-us" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
           <Route path="/business" element={<Business />} />
           <Route path='/login' element={<Login/>}/>
+          <Route path='/cart' element={<Cart/>}/>
         </Route>
         <Route path="/details/:id" element={<DetailsPage />} />
       </Routes>
+      <Footer/>
     </BrowserRouter>
     </>
   );

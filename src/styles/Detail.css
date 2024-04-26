@@ -1,9 +1,10 @@
 .detail-container {
-height: 100vh;
+height: 100%;
 background-color: #fefae0;
 padding-top: 100px;
 padding-left: 100px;
 padding-right: 100px;
+padding-bottom: 50px;
 }
 
 .detail-image{
@@ -53,6 +54,7 @@ padding-right: 100px;
     color: white;
     font-size: 20px;
     box-shadow: none;
+    border-radius: 10px;
 }
 .drop-down:focus{
     outline: none;
@@ -69,22 +71,40 @@ margin-top: 20px;
 
 .cart-btn{
     padding: 10px;
-    background-color: black;
-    color: white;
-    outline: none;
-    border: none;
-    border-radius: 10px;
-    font-size: 20px;
-    font-weight: bold;
-}
-.buy-btn{
-    padding: 10px;
     background-color: transparent;
     color: black;
+    outline: none;
     border: 1px solid black;
     border-radius: 10px;
     font-size: 20px;
     font-weight: bold;
+}
+
+.cart-btn:hover{
+    background-color: black;
+    color: white;
+    outline: none;
+    border: 1px solid;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+.buy-btn{
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.buy-btn:hover{
+    background-color: transparent;
+    color: black;
+    border: 1px solid black;
 }
 
 .desc-setting{
@@ -100,4 +120,17 @@ margin-top: 20px;
     color: blue;
     text-decoration: underline;
     font-weight: bold;
+}
+table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,td{
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){
+    background-color: #faedcd;
 }
