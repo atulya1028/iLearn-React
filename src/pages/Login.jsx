@@ -4,8 +4,7 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import "../App.css";
-
+import '../styles/Login.css';
 export const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -32,7 +31,7 @@ export const Login = () => {
 
   const handleSignIn = async () => {
     try {
-      const response = await fetch("https://stunning-narwhal-c76f9e.netlify.app/api/auth/login", {
+      const response = await fetch("http://localhost:8080/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -44,7 +43,9 @@ export const Login = () => {
       if (data.token) {
         toast.success("Login Successful");
         localStorage.setItem("token", data.token);
-        navigate("/");
+        navigate("/",{state: {refreshHandler:true}});
+        window.location.reload();
+        window.location.reload();
       } else {
         toast.error("Invalid credentials. Please try again.");
         setErrorMessage("Invalid credentials. Please try again.");
@@ -57,29 +58,31 @@ export const Login = () => {
   };
 
   useEffect(() => {
+
     handleScreenWidth();
     window.addEventListener("resize", handleScreenWidth);
 
     return () => {
       window.removeEventListener("resize", handleScreenWidth);
     }
-  }, [handleScreenWidth]);
+   
+  }, []);
 
   return (
-    <>
+    <div className="login">
       <ToastContainer />
       {screenWidth ? (
         <div
-          style={{
-            backgroundColor: "#ccd5ae",
-            marginTop: "50px",
+          style={{  
+            marginTop: "200px",
             width: "80%",
             marginLeft: "30px",
+            marginRight: "30px",
             borderRadius: '20px',
             padding: '20px',
           }}
         >
-          <h3 className="login-heading" style={{ fontSize: '30px', fontWeight: 'bold' }}>
+          <h3 className="login-heading">
             Welcome to iLearn <br />
             Your book online book store
           </h3>
@@ -110,15 +113,15 @@ export const Login = () => {
           <button className="sign-in" onClick={handleSignIn}>
             SignIn
           </button>
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
+          {errorMessage && <p>{errorMessage}</p>}
         </div>
       ) : (
         <div className="parentDiv">
           <div className="container">
-            <h3 className="login-heading">
+            <h5 className="login-heading">
               Welcome to iLearn <br />
               Your book online book store
-            </h3>
+            </h5>
             <input
               type="text"
               placeholder="Enter email"
@@ -153,6 +156,6 @@ export const Login = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };

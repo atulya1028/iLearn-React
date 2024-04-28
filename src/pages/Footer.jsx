@@ -9,17 +9,18 @@ export const Footer = () => {
         style={{
           width: "100%",
           height:'100px',
-          backgroundColor: "black",
+          backgroundColor: "white",
           padding: "50px",
+          borderTop:'1px solid gray'
         }}
       >
         <div
           style={{
             display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: "center",
-            color: "white",
+            alignItems: "flex-start",
+            justifyContent: "flex-start",
+            textAlign: "start",
+            color: "black",
           }}
         >
           {" "}

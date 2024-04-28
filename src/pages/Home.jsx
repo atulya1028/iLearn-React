@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import books from "../images/books.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -31,7 +30,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://stunning-narwhal-c76f9e.netlify.app/api/books");
+        const response = await fetch("http://localhost:8080/api/books");
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
@@ -48,7 +47,7 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    
       <div className="nav-container">
         <div className="banner">
           <div className="device-container">
@@ -68,6 +67,7 @@ export default function Home() {
               </p>
             )}
             {isMobile ? (
+              <>
               <button className="m-special-button">
                 Special for you{" "}
                 <FontAwesomeIcon
@@ -76,6 +76,12 @@ export default function Home() {
                   color="green"
                 />
               </button>
+              {isMobile ? (
+            <img src={books} alt="books" className="mobile-img" />
+          ) : (
+            <></>
+          )}
+              </>
             ) : (
               <button className="special-button">
                 Special for you{" "}
@@ -87,16 +93,11 @@ export default function Home() {
               </button>
             )}
           </div>
-          {isMobile ? (
-            <img src={books} alt="books" className="mobile-img" />
-          ) : (
-            <img src={books} alt="books" className="notebook-img" />
-          )}
+        {!isMobile ? <img src={books} alt="books" className="notebook-img" /> : <></>}
         </div>
-
         <div className="heading">
-          <h1>Best Selling Books</h1>
-          <div style={{color:'blue',fontWeight:'bold'}} onClick={toggleShowMore} className="view">
+          <h4>Best Selling Books</h4>
+          <div onClick={toggleShowMore} className="view">
             {showMore ? "View Less" : 'View More'}
           </div>
         </div>
@@ -106,34 +107,23 @@ export default function Home() {
         <ul className="book-list">
           {booksData.map((book) => (
             <li key={book._id}>
-              <Link to={`/details/${book._id}`}>
-                <Card className="box-card">
-                  <Card.Img
-                    src={`https://stunning-narwhal-c76f9e.netlify.app/${book.image}`}
+              <Link to={`/details/${book._id}`} className="card-text">
+              <div className="box-card">
+                  <img
+                    src={`http://localhost:8080/${book.image}`}
                     alt={book.title}
                     className="card-image"
                   />
-                  <Card.Body> 
-                    <Card.Title
-                      style={{
-                        fontSize: "12px",
-                        textAlign: "center",
-                        fontWeight: "bold",
-                      }}
-                    >
+                     <div>
                       {book.title}
-                    </Card.Title>
-                    <Card.Title
-                      style={{
-                        fontSize: "12px",
-                        textAlign: "center",
-                        fontWeight: "bold",
-                      }}
-                    >
+                    </div>
+                    <div>
                       {book.author}
-                    </Card.Title>
-                  </Card.Body>
-                </Card>
+                    </div>
+                    <div>
+                      ₹{book.price}
+                    </div>
+                </div>
               </Link>
             </li>
           ))}
@@ -142,39 +132,29 @@ export default function Home() {
          <ul className="book-list">
           {booksData.slice(0,4).map((book) => (
             <li key={book._id}>
-              <Link to={`/details/${book._id}`}>
-                <Card className="box-card">
-                  <Card.Img
-                    src={`https://stunning-narwhal-c76f9e.netlify.app/${book.image}`}
+              <Link to={`/details/${book._id}`} className="card-text">
+                <div className="box-card">
+                  <img
+                    src={`http://localhost:8080/${book.image}`}
                     alt={book.title}
                     className="card-image"
                   />
-                  <Card.Body>
-                    <Card.Title
-                      style={{
-                        fontSize: "12px",
-                        textAlign: "center",
-                        fontWeight: "bold",
-                      }}
-                    >
+                     <div>
                       {book.title}
-                    </Card.Title>
-                    <Card.Title
-                      style={{
-                        fontSize: "12px",
-                        textAlign: "center",
-                        fontWeight: "bold",
-                      }}
-                    >
+                    </div>
+                    <div>
                       {book.author}
-                    </Card.Title>
-                  </Card.Body>
-                </Card>
+                    </div>
+                    <div>
+                      ₹{book.price}
+                    </div>
+                </div>
               </Link>
+              <button className="add-cart">Add to cart</button>
             </li>
           ))}
         </ul>}
+        <div style={{height:'50px'}}/>
       </div>
-    </>
   );
 }

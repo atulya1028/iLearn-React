@@ -7,14 +7,22 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faSignIn, faInfoCircle, faContactCard, faBusinessTime, faSignOut } from "@fortawesome/free-solid-svg-icons";
 
-const SideBars = ({ isOpen, toggleSidebar, loggedIn, handleLogout, closeSidebar }) => {
+const SideBars = ({ isOpen, toggleSidebar, loggedIn, handleLogout }) => {
   const handleMenuItemClick = () => {
-    closeSidebar(); // Close the sidebar when a menu item is clicked
+    toggleSidebar(); // Close the sidebar when a menu item is clicked
   };
 
   const handleLoginClick = () => {
     toggleSidebar(); // Toggle the sidebar when the Login/Register button is clicked
-    handleMenuItemClick(); // Close the sidebar after toggling (if it was open)
+  };
+
+  const handleLogoutClick = () => {
+    // Clear the token from localStorage
+    localStorage.removeItem('token');
+    // Update the logged-in state or any other relevant state
+    handleLogout();
+    // Close the sidebar
+    toggleSidebar();
   };
 
   return (
@@ -41,7 +49,7 @@ const SideBars = ({ isOpen, toggleSidebar, loggedIn, handleLogout, closeSidebar 
           </ListItemText>
         </ListItem>
         {loggedIn ? (
-          <ListItem button component={Link} to="/" onClick={toggleSidebar}>
+          <ListItem button component={Link} to="/" onClick={handleLogoutClick}>
             <ListItemText>
               <FontAwesomeIcon icon={faSignOut} color="blue" /> Logout
             </ListItemText>
