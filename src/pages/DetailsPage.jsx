@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {useParams } from "react-router-dom";
+import {Link, useParams } from "react-router-dom";
 import "../styles/Detail.css";
 import favorite from "../images/favorite.png";
 
@@ -71,7 +71,7 @@ const BookDetails = () => {
               </select>
               <div className="btn-setting">
                 <div className="btn-handle">
-                  <button className="cart-btn">ADD TO CART</button>
+                  <Link to='/cart'><button className="cart-btn">ADD TO CART</button></Link>
                   <button className="buy-btn">BUY NOW</button>
                 </div>
               </div>

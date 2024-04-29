@@ -74,12 +74,13 @@ export const Login = () => {
       {screenWidth ? (
         <div
           style={{  
-            marginTop: "200px",
+            marginTop: "100px",
             width: "80%",
             marginLeft: "30px",
             marginRight: "30px",
             borderRadius: '20px',
             padding: '20px',
+            border:'1px solid black'
           }}
         >
           <h3 className="login-heading">
@@ -91,6 +92,7 @@ export const Login = () => {
             placeholder="Enter email"
             value={email}
             onChange={handleEmailChange}
+            className="email"
           />
           <br />
           <br />
@@ -100,6 +102,7 @@ export const Login = () => {
               placeholder="Enter Password"
               value={password}
               onChange={handlePasswordChange}
+              className="pass"
             />
             <button className="showHideBtn" onClick={togglePasswordVisibility}>
               {showPassword ? (
@@ -127,6 +130,7 @@ export const Login = () => {
               placeholder="Enter email"
               value={email}
               onChange={handleEmailChange}
+              className="email"
             />
             <br />
             <br />
@@ -136,6 +140,7 @@ export const Login = () => {
                 placeholder="Enter Password"
                 value={password}
                 onChange={handlePasswordChange}
+                className="pass"
               />
               <button
                 className="showHideBtn"
