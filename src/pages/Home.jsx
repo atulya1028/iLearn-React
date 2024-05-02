@@ -4,6 +4,7 @@ import books from "../images/books.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleRight } from "@fortawesome/free-solid-svg-icons";
 import "../styles/Home.css";
+import '../App.css';
 
 export default function Home() {
   const [booksData, setBooksData] = useState([]);
@@ -27,6 +28,8 @@ export default function Home() {
     };
   }, []);
 
+  console.log("Token : ----- ",localStorage.getItem('token'));
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -45,6 +48,7 @@ export default function Home() {
     fetchData();
     console.log("Width: ", window.innerWidth);
   }, []);
+  
 
   return (
     
@@ -132,7 +136,7 @@ export default function Home() {
          <ul className="book-list">
           {booksData.slice(0,4).map((book) => (
             <li key={book._id}>
-              <Link to={`/details/${book._id}`} className="card-text">
+              <Link to={`/details/${book.title}`} className="card-text">
                 <div className="box-card">
                   <img
                     src={`http://localhost:8080/${book.image}`}
@@ -150,7 +154,6 @@ export default function Home() {
                     </div>
                 </div>
               </Link>
-              <button className="add-cart">Add to cart</button>
             </li>
           ))}
         </ul>}

@@ -58,6 +58,8 @@ const Header = () => {
         if (response.ok) {
           const data = await response.json();
           setUserProfile(data.user);
+          console.log("User id: -------- ",data.user._id);
+          localStorage.setItem('userId',data.user._id);
           setLoggedIn(true);
         } else {
           // Handle unauthorized access or other errors
@@ -85,6 +87,7 @@ const Header = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
 
   return (
     <>
@@ -135,10 +138,10 @@ const Header = () => {
               }}
             >
               <FontAwesomeIcon icon={faHeart} className="fav"/>
-              <FontAwesomeIcon
+             <Link to='/cart'> <FontAwesomeIcon
                 icon={faBagShopping}
                 className="bag"
-              />
+              /></Link>
               <FontAwesomeIcon
                 icon={faUserCircle}
                 className="user-circle"

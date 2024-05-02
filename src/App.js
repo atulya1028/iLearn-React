@@ -8,7 +8,7 @@ import DetailsPage from './pages/DetailsPage';
 import Layout from './pages/Layout';
 import { Login } from './pages/Login';
 import { Footer } from './pages/Footer';
-import { Cart } from './pages/Cart';
+import Cart from './pages/Cart';
 
 function App() {
 
@@ -30,7 +30,7 @@ function App() {
           <Route path="/business" element={<Business />} />
           <Route path='/login' element={<Login/>}/>
           <Route path='/cart' element={<Cart/>}/>
-          <Route path="/details/:id" element={<DetailsPage />} />
+          <Route path="/details/:title" element={<DetailsPage />} />
         </Route>
       </Routes>
       <Footer/>
