@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../images/iLearn.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faUserCircle,faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faUserCircle, faHeart, faSearch } from "@fortawesome/free-solid-svg-icons";
 import SideBars from "./SideBars";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
 import "../App.css";
@@ -10,10 +10,16 @@ import "../App.css";
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 576);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 576 || window.innerWidth <=768 );
   const [userProfile, setUserProfile] = useState(null);
   const [viewProfile, setViewProfile] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [cartItemsCount, setCartItemsCount] = useState(0);
+  const [favoriteCount, setFavoriteCount] = useState(0);
 
+  const navigate = useNavigate();
+  
   const handleProfile = () => {
     setViewProfile(!viewProfile);
   };
@@ -22,7 +28,6 @@ const Header = () => {
 
   useEffect(() => {
     if (location.state && location.state.refreshHeader) {
-      // Refresh header logic here
       console.log("Header refreshed!");
     }
   }, [location.state]);
@@ -34,7 +39,6 @@ const Header = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setLoggedIn(false);
-    // Handle logout logic here
     setLoggedIn(false);
     handleProfile();
   };
@@ -58,18 +62,15 @@ const Header = () => {
         if (response.ok) {
           const data = await response.json();
           setUserProfile(data.user);
-          console.log("User id: -------- ",data.user._id);
-          localStorage.setItem('userId',data.user._id);
+          localStorage.setItem('userId', data.user._id);
           setLoggedIn(true);
         } else {
-          // Handle unauthorized access or other errors
           console.error("Profile Fetch Error:", response.statusText);
           setLoggedIn(false);
         }
       } catch (error) {
         console.error("Profile Fetch Error:", error.message);
         setLoggedIn(false);
-      } finally {
       }
     };
 
@@ -78,7 +79,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 576);
+      setIsMobile(window.innerWidth <= 576 || window.innerWidth <=768);
     };
 
     window.addEventListener("resize", handleResize);
@@ -88,13 +89,97 @@ const Header = () => {
     };
   }, []);
 
+  const handleSearch = async () => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/book/search?q=${searchTerm}`);
+      if (response.ok) {
+        const data = await response.json();
+        setSearchResults(data);
+        console.log(data);
+        navigate(`/details/${searchTerm}`); 
+      } else {
+        console.error('Error searching:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error searching:', error.message);
+    }
+  };
+
+  const fetchCartItemsCount = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setCartItemsCount(0);
+        return;
+      }
+  
+      const response = await fetch("http://localhost:8080/api/cart/cart-items-count", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        setCartItemsCount(data.cartItemCount);
+      } else {
+        console.error("Cart Items Count Fetch Error:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Cart Items Count Fetch Error:", error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchCartItemsCount();
+  }, []);
+  
+  useEffect(() => {
+    if (!loggedIn) {
+      setCartItemsCount(0);
+    } else {
+      fetchCartItemsCount();
+    }
+  }, [loggedIn]);
+
+  useEffect(() => {
+    const fetchFavoriteCount = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          setFavoriteCount(0);
+          return;
+        }
+
+        const response = await fetch("http://localhost:8080/api/book/favorite-count", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setFavoriteCount(data.favoriteCount);
+        } else {
+          console.error("Favorite Count Fetch Error:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Favorite Count Fetch Error:", error.message);
+      }
+    };
+
+    fetchFavoriteCount();
+  }, []);
 
   return (
     <>
       {isMobile ? (
-        <header className="head">
-          <span style={{ display: "flex" }}>
-            <FontAwesomeIcon
+       <>
+        <header>
+          <span className="head">
+           <span> <FontAwesomeIcon
               color="black"
               fontSize={25}
               icon={faBars}
@@ -107,7 +192,13 @@ const Header = () => {
                 borderRadius: "5px",
               }}
             />
-            <img src={logo} width={200} height={50} alt="logo" />
+            <img src={logo} width={50} height={100} alt="logo"/></span>
+            <span><Link to='/favorite'> <FontAwesomeIcon icon={faHeart} className="fav" /></Link>
+             <span className="favorite-count">{favoriteCount}</span>
+             <Link to='/cart'>
+                <FontAwesomeIcon icon={faBagShopping} className="bag" />
+              </Link>
+               <span className="cart-items-count">{cartItemsCount}</span></span>
           </span>
           <SideBars
             isOpen={isSidebarOpen}
@@ -116,6 +207,18 @@ const Header = () => {
             handleLogout={handleLogout}
           />
         </header>
+        <span>
+        <input
+            className="search-box"
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search by Author, Name"
+          />
+          <FontAwesomeIcon icon={faSearch} onClick={handleSearch} className="search">
+            Search</FontAwesomeIcon>
+        </span>
+       </>
       ) : (
         <header className="head">
           <Link to="/">
@@ -123,11 +226,14 @@ const Header = () => {
             <img src={logo} width="280px" height="150px" alt="iLearn" />
           </Link>
           <input
-            type="text"
             className="search-box"
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search by Author, Name"
           />
-
+          <FontAwesomeIcon icon={faSearch} onClick={handleSearch} className="search">
+            Search</FontAwesomeIcon>
           <div>
             <span
               style={{
@@ -137,11 +243,14 @@ const Header = () => {
                 alignItems: "center",
               }}
             >
-              <FontAwesomeIcon icon={faHeart} className="fav"/>
-             <Link to='/cart'> <FontAwesomeIcon
-                icon={faBagShopping}
-                className="bag"
-              /></Link>
+              <Link to='/favorite'> 
+                <FontAwesomeIcon icon={faHeart} className="fav" />
+              </Link>
+             <span className="favorite-count">{favoriteCount}</span>
+              <Link to='/cart'>
+                <FontAwesomeIcon icon={faBagShopping} className="bag" />
+              </Link>
+              {cartItemsCount > 0 && <span className="cart-items-count">{cartItemsCount}</span>}
               <FontAwesomeIcon
                 icon={faUserCircle}
                 className="user-circle"

@@ -4,17 +4,107 @@ import books from "../images/books.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleRight } from "@fortawesome/free-solid-svg-icons";
 import "../styles/Home.css";
-import '../App.css';
+import "../App.css";
+import favorite from "../images/favorite.png";
+import favoriteFill from "../images/favorite-fill.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
   const [booksData, setBooksData] = useState([]);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 576);
+  const [showMore, setShowMore] = useState(false);
+  const [favorites, setFavorites] = useState([]);
 
-  const [showMore,setShowMore] = useState(false);
+  // Fetch favorites data
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      const token = localStorage.getItem("token");
+      try {
+        const response = await fetch("http://localhost:8080/api/book/favorites", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (!response.ok) {
+          throw new Error("Failed to fetch favorites");
+        }
+        const data = await response.json();
+        setFavorites(data.favorites.map((fav) => fav._id));
+      } catch (error) {
+        console.error("Error fetching favorites:", error);
+      }
+    };
+    fetchFavorites();
+  }, []);
 
-  const toggleShowMore = ()=>{
+  // Function to check if a book is in favorites
+  const isFavorite = (bookId) => favorites.includes(bookId);
+
+  // Function to add a book to favorites
+  const handleFavorite = async (bookId) => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/book/add-to-favorites/${bookId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to add to favorites");
+      }
+
+      const updatedFavorites = [...favorites, bookId];
+      setFavorites(updatedFavorites);
+      console.log("Book added to favorites:", updatedFavorites);
+      toast.success("Favorite added successfully");
+    } catch (error) {
+      toast.error("Favorite already added");
+      console.error("Error adding to favorites:", error);
+    }
+    window.location.reload();
+    window.location.reload();
+  };
+
+  // Function to remove a book from favorites
+  const handleRemoveFavorite = async (bookId) => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/book/remove-from-favorites/${bookId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to remove from favorites");
+      }
+
+      const updatedFavorites = favorites.filter((favId) => favId !== bookId);
+      setFavorites(updatedFavorites);
+      console.log("Book removed from favorites:", updatedFavorites);
+      toast.success("Favorite removed successfully");
+    } catch (error) {
+      console.error("Error removing from favorites:", error);
+    }
+    window.location.reload();
+    window.location.reload();
+  };
+
+  const toggleShowMore = () => {
     setShowMore(!showMore);
-  }
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -27,8 +117,6 @@ export default function Home() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  console.log("Token : ----- ",localStorage.getItem('token'));
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,10 +136,10 @@ export default function Home() {
     fetchData();
     console.log("Width: ", window.innerWidth);
   }, []);
-  
 
   return (
-    
+    <>
+      <ToastContainer />
       <div className="nav-container">
         <div className="banner">
           <div className="device-container">
@@ -72,19 +160,19 @@ export default function Home() {
             )}
             {isMobile ? (
               <>
-              <button className="m-special-button">
-                Special for you{" "}
-                <FontAwesomeIcon
-                  icon={faCircleRight}
-                  size="1.5x"
-                  color="green"
-                />
-              </button>
-              {isMobile ? (
-            <img src={books} alt="books" className="mobile-img" />
-          ) : (
-            <></>
-          )}
+                <button className="m-special-button">
+                  Special for you{" "}
+                  <FontAwesomeIcon
+                    icon={faCircleRight}
+                    size="1.5x"
+                    color="green"
+                  />
+                </button>
+                {isMobile ? (
+                  <img src={books} alt="books" className="mobile-img" />
+                ) : (
+                  <></>
+                )}
               </>
             ) : (
               <button className="special-button">
@@ -97,67 +185,91 @@ export default function Home() {
               </button>
             )}
           </div>
-        {!isMobile ? <img src={books} alt="books" className="notebook-img" /> : <></>}
+          {!isMobile ? (
+            <img src={books} alt="books" className="notebook-img" />
+          ) : (
+            <></>
+          )}
         </div>
         <div className="heading">
           <h4>Best Selling Books</h4>
           <div onClick={toggleShowMore} className="view">
-            {showMore ? "View Less" : 'View More'}
+            {showMore ? "View Less" : "View More"}
           </div>
         </div>
-        <hr style={{marginLeft:'20px',marginRight:'20px'}}/>
-        <div style={{ paddingTop: "50px"}} />
-        {showMore ? 
-        <ul className="book-list">
-          {booksData.map((book) => (
-            <li key={book._id}>
-              <Link to={`/details/${book._id}`} className="card-text">
-              <div className="box-card">
+        <hr style={{ marginLeft: "20px", marginRight: "20px" }} />
+        <div style={{ paddingTop: "50px" }} />
+        {showMore ? (
+          <ul className="book-list">
+            {booksData.map((book) => (
+              <li key={book._id}>
+                <div className="box-card" style={{ paddingTop: "10px" }}>
                   <img
                     src={`http://localhost:8080/${book.image}`}
                     alt={book.title}
                     className="card-image"
                   />
-                     <div>
-                      {book.title}
-                    </div>
-                    <div>
-                      {book.author}
-                    </div>
-                    <div>
-                      ₹{book.price}
-                    </div>
+                  <div>{book.title}</div>
+                  <div>{book.author}</div>
+                  <div>₹{book.price}</div>
+                  <span style={{ display: "flex", gap: "11px" }}>
+                    <Link to={`/details/${book.title}`} className="card-text">
+                      <button style={{ width: "105px", fontSize: "10px" }}>
+                        ADD TO CART
+                      </button>
+                    </Link>
+                    <img
+                      src={isFavorite(book._id) ? favoriteFill : favorite}
+                      alt="Favorite"
+                      className="favorite-icon"
+                      onClick={() =>
+                        isFavorite(book._id)
+                          ? handleRemoveFavorite(book._id)
+                          : handleFavorite(book._id)
+                      }
+                      width={25}
+                    />
+                  </span>
                 </div>
-              </Link>
-            </li>
-          ))}
-        </ul> 
-        :
-         <ul className="book-list">
-          {booksData.slice(0,4).map((book) => (
-            <li key={book._id}>
-              <Link to={`/details/${book.title}`} className="card-text">
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <ul className="book-list">
+            {booksData.slice(0, 4).map((book) => (
+              <li key={book._id}>
                 <div className="box-card">
                   <img
                     src={`http://localhost:8080/${book.image}`}
                     alt={book.title}
                     className="card-image"
                   />
-                     <div>
-                      {book.title}
-                    </div>
-                    <div>
-                      {book.author}
-                    </div>
-                    <div>
-                      ₹{book.price}
-                    </div>
+                  <div className="text-hover">{book.title}</div>
+                  <div className="text-hover">{book.author}</div>
+                  <div className="text-hover">₹{book.price}</div>
+                  <span style={{ display: "flex", gap: "11px" }}>
+                    <Link to={`/details/${book.title}`} className="card-text">
+                      <button className="add-cart">ADD TO CART</button>
+                    </Link>
+                    <img
+                      src={isFavorite(book._id) ? favoriteFill : favorite}
+                      alt="Favorite"
+                      className="favorite-icon"
+                      onClick={() =>
+                        isFavorite(book._id)
+                          ? handleRemoveFavorite(book._id)
+                          : handleFavorite(book._id)
+                      }
+                      width={25}
+                    />
+                  </span>
                 </div>
-              </Link>
-            </li>
-          ))}
-        </ul>}
-        <div style={{height:'50px'}}/>
+              </li>
+            ))}
+          </ul>
+        )}
+        <div style={{ height: "50px" }} />
       </div>
+    </>
   );
 }

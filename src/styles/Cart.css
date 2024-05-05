@@ -1,5 +1,6 @@
 .cart{
   height: 100vh;
+  overflow-y: auto;
 }
 
 .details{
@@ -10,6 +11,7 @@
   gap: 70px;
 }
 
+
 .heading{
   display: flex;
   text-align: center;
@@ -19,7 +21,6 @@
 
 .items{
   display: flex;
-  justify-content: start;
   gap: 10px;
   border: 1px solid gainsboro;
   padding: 10px;
@@ -39,9 +40,11 @@
   justify-content: space-between;
   gap: 5px;
   padding: 10px;
-  border: 1px solid black;
+  border: 1px solid gainsboro;
   margin-right: 20px;
   width: 30%;
+  margin-top: 40px;
+  text-align: center;
 }
 
 .order-details{
@@ -53,4 +56,15 @@
 .empty-box{
   display: flex;
   margin: auto;
+}
+
+.main{
+  height: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.block1{
+  display: block;
 }

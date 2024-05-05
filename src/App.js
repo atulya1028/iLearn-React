@@ -7,12 +7,11 @@ import Business from './pages/Business';
 import DetailsPage from './pages/DetailsPage';
 import Layout from './pages/Layout';
 import { Login } from './pages/Login';
-import { Footer } from './pages/Footer';
 import Cart from './pages/Cart';
+import { CreateOrder } from './pages/CreateOrder';
+import Favorite  from './pages/Favorite';
 
 function App() {
-
-
   return (
     <>
         <BrowserRouter>
@@ -31,9 +30,10 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/cart' element={<Cart/>}/>
           <Route path="/details/:title" element={<DetailsPage />} />
+          <Route path="/favorite" element={<Favorite />} />
         </Route>
+        <Route path="/create-order" element={<CreateOrder />} />
       </Routes>
-      <Footer/>
     </BrowserRouter>
     </>
   );

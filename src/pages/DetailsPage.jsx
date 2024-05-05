@@ -10,7 +10,6 @@ const DetailsPage = () => {
   const [book, setBook] = useState(null);
   const [selectedValue, setSelectedValue] = useState(1); 
   const [readMore, setReadMore] = useState(false);
-  const [totalPrice, setTotalPrice] = useState(0); 
 
   const apiUrl = `http://localhost:8080/api/books/${param.title}`;
 
@@ -37,9 +36,11 @@ const DetailsPage = () => {
 
       // Update state to show total price
       setTotalPrice(data.totalPrice);
+      
     } catch (error) {
       console.error('Error adding to cart:', error);
     }
+    window.location.reload();
   };
 
   useEffect(() => {
