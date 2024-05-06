@@ -3,12 +3,11 @@ import { Link } from "react-router-dom";
 import books from "../images/books.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleRight } from "@fortawesome/free-solid-svg-icons";
-import "../styles/Home.css";
-import "../App.css";
 import favorite from "../images/favorite.png";
 import favoriteFill from "../images/favorite-fill.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../App.css";
 
 export default function Home() {
   const [booksData, setBooksData] = useState([]);
@@ -164,12 +163,12 @@ export default function Home() {
                   Special for you{" "}
                   <FontAwesomeIcon
                     icon={faCircleRight}
-                    size="1.5x"
+                    size="sm"
                     color="green"
                   />
                 </button>
                 {isMobile ? (
-                  <img src={books} alt="books" className="mobile-img" />
+                  <img src={books} alt="books" className="book-icon" />
                 ) : (
                   <></>
                 )}
@@ -179,14 +178,14 @@ export default function Home() {
                 Special for you{" "}
                 <FontAwesomeIcon
                   icon={faCircleRight}
-                  size="1.5x"
+                  size="sm"
                   color="green"
                 />
               </button>
             )}
           </div>
           {!isMobile ? (
-            <img src={books} alt="books" className="notebook-img" />
+            <img src={books} alt="books" className="book-icon" />
           ) : (
             <></>
           )}
@@ -212,9 +211,9 @@ export default function Home() {
                   <div>{book.title}</div>
                   <div>{book.author}</div>
                   <div>₹{book.price}</div>
-                  <span style={{ display: "flex", gap: "11px" }}>
+                  <span style={{ display: "flex", gap: "10px" }}>
                     <Link to={`/details/${book.title}`} className="card-text">
-                      <button style={{ width: "105px", fontSize: "10px" }}>
+                      <button className="add-cart">
                         ADD TO CART
                       </button>
                     </Link>
@@ -227,7 +226,8 @@ export default function Home() {
                           ? handleRemoveFavorite(book._id)
                           : handleFavorite(book._id)
                       }
-                      width={25}
+                      width={20}
+                      height={20}
                     />
                   </span>
                 </div>
@@ -244,11 +244,13 @@ export default function Home() {
                     alt={book.title}
                     className="card-image"
                   />
-                  <div className="text-hover">{book.title}</div>
+                  <div className="text-hover card-text">{book.title}</div>
                   <div className="text-hover">{book.author}</div>
                   <div className="text-hover">₹{book.price}</div>
-                  <span style={{ display: "flex", gap: "11px" }}>
-                    <Link to={`/details/${book.title}`} className="card-text">
+                  <span style={{ display: "flex",
+                  gap:'10px',
+                  justifyContent:'space-evenly',alignContent:'center' }}>
+                    <Link to={`/details/${book.title}`} >
                       <button className="add-cart">ADD TO CART</button>
                     </Link>
                     <img
@@ -260,7 +262,8 @@ export default function Home() {
                           ? handleRemoveFavorite(book._id)
                           : handleFavorite(book._id)
                       }
-                      width={25}
+                      width={20}
+                      height={20}
                     />
                   </span>
                 </div>

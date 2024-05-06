@@ -11,11 +11,7 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth <= 576);
 
-  const handleScreenWidth = () => {
-    setScreenWidth(window.innerWidth <= 576);
-  }
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -71,7 +67,48 @@ export const Login = () => {
   return (
     <div className="login">
       <ToastContainer />
-      {screenWidth ? (
+      
+        <div className="parentDiv">
+        <h5 className="login-heading">
+              Welcome to iLearn <br />
+              Your book online book store
+            </h5>
+            <input
+              type="text"
+              placeholder="Enter email"
+              value={email}
+              onChange={handleEmailChange}
+              className="email"
+            />
+            <span className="password-container">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter Password"
+                value={password}
+                onChange={handlePasswordChange}
+                className="pass"
+              />
+              <button
+                className="showHideBtn"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? (
+                  <FontAwesomeIcon icon={faEyeSlash} />
+                ) : (
+                  <FontAwesomeIcon icon={faEye} />
+                )}
+              </button>
+            </span>
+            <button className="sign-in" onClick={handleSignIn}>
+              SignIn
+            </button>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+        </div>
+    </div>
+  );
+};
+
+/* screenWidth ? (
         <div
           style={{  
             marginTop: "100px",
@@ -118,49 +155,4 @@ export const Login = () => {
           </button>
           {errorMessage && <p>{errorMessage}</p>}
         </div>
-      ) : (
-        <div className="parentDiv">
-          <div className="container">
-            <h5 className="login-heading">
-              Welcome to iLearn <br />
-              Your book online book store
-            </h5>
-            <input
-              type="text"
-              placeholder="Enter email"
-              value={email}
-              onChange={handleEmailChange}
-              className="email"
-            />
-            <br />
-            <br />
-            <span className="password-container">
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter Password"
-                value={password}
-                onChange={handlePasswordChange}
-                className="pass"
-              />
-              <button
-                className="showHideBtn"
-                onClick={togglePasswordVisibility}
-              >
-                {showPassword ? (
-                  <FontAwesomeIcon icon={faEyeSlash} />
-                ) : (
-                  <FontAwesomeIcon icon={faEye} />
-                )}
-              </button>
-            </span>
-            <br /> <br />
-            <button className="sign-in" onClick={handleSignIn}>
-              SignIn
-            </button>
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
+      )  */

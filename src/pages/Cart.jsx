@@ -160,7 +160,7 @@ const Cart = () => {
                       <span
                         style={{
                           display: "flex",
-                          justifyContent: "flex-start",
+                          justifyContent: "flex-flex-start",
                           gap: "10px",
                         }}
                       >

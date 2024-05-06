@@ -29,7 +29,7 @@
 .title-top{
   display: flex;
   justify-content: space-evenly;
-  align-items: flex-start;
+  align-items: flex-flex-start;
   padding-top: 50px;
   gap: 170px;
 }
@@ -50,7 +50,7 @@
 .order-details{
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: flex-flex-start;
 }
 
 .empty-box{
@@ -62,7 +62,7 @@
   height: 100;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: flex-flex-start;
 }
 
 .block1{

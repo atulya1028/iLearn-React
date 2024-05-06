@@ -14,7 +14,7 @@ const Header = () => {
   const [userProfile, setUserProfile] = useState(null);
   const [viewProfile, setViewProfile] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  const [setSearchResults] = useState([]);
   const [cartItemsCount, setCartItemsCount] = useState(0);
   const [favoriteCount, setFavoriteCount] = useState(0);
 
@@ -198,7 +198,8 @@ const Header = () => {
              <Link to='/cart'>
                 <FontAwesomeIcon icon={faBagShopping} className="bag" />
               </Link>
-               <span className="cart-items-count">{cartItemsCount}</span></span>
+               {cartItemsCount > 0 && <div className="cart-items-count">{cartItemsCount}</div>}
+               </span>
           </span>
           <SideBars
             isOpen={isSidebarOpen}
@@ -213,7 +214,7 @@ const Header = () => {
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search by Author, Name"
+            placeholder="Search by Name"
           />
           <FontAwesomeIcon icon={faSearch} onClick={handleSearch} className="search">
             Search</FontAwesomeIcon>

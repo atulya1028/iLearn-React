@@ -1,0 +1,186 @@
+.header {
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-box {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 10px 150px 10px; 
+    padding-bottom: 100px;
+}
+
+.country-box {
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.country-choice {
+    width: 100%;
+    border: none;
+    border-color: transparent;
+}
+
+.country-choice select:focus {
+    outline: none;
+    border: none;
+    border-color: transparent;
+}
+
+input {
+    width: 50%;
+    height: 50px;
+    padding: 5px;
+}
+
+.address {
+    width: 100%;
+    height: 50px;
+    padding: 5px;
+}
+
+.apartment {
+    width: 100%;
+    height: 50px;
+    padding: 5px;
+}
+
+.city {
+    width: 30%;
+    height: 50px;
+    padding: 5px;
+}
+
+.state-box {
+    width: 30%;
+    border: 1px solid black;
+    padding: 2px;
+    border-radius: 5px;
+}
+
+.state-choice {
+    width: 100%;
+    border-color: transparent;
+}
+
+.state-choice:active {
+    border-color: transparent;
+}
+
+.pincode {
+    width: 30%;
+    height: 50px;
+    padding: 5px;
+}
+
+.phone {
+    width: 100%;
+    height: 50px;
+    padding: 5px;
+}
+
+.save {
+    width: 20px;
+}
+
+.shipping-details {
+    border: 1px solid gainsboro;
+    border-radius: 5px;
+    width: 120%;
+    padding: 10px;
+
+}
+
+.item-details {
+    border-top: 1px solid gainsboro;
+    border-right: 1px solid gainsboro;
+    border-bottom: 1px solid gainsboro;
+    border-radius: 5px;
+    width: 50%;
+    display: block;
+    justify-content: flex-start;
+    padding: 10px;
+}
+
+.intro {
+    display: flex;
+    gap: 30px;
+}
+
+.loc {
+    display: flex;
+    justify-content: space-between;
+}
+
+.check-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.save-info {
+    padding-top: 5px;
+    font-size: 15px;
+}
+
+.to-cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-btn {
+    display: flex;
+    text-decoration: none;
+    color: black;
+    justify-content: flex-flex-start;
+    border: none;
+}
+
+.shipping-btn {
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 17px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.book-box {
+    display: flex;
+    justify-content: flex-start;
+    gap: 50px;
+}
+
+.text {
+    padding-top: 25px;
+}
+
+.subtotal {
+    display: flex;
+    justify-content: flex-start;
+    gap: 240px;
+}
+
+.ship {
+    display: flex;
+    justify-content: flex-start;
+    gap: 120px;
+}
+
+.total {
+    display: flex;
+    justify-content: flex-start;
+    gap: 190px;
+}
+
+.price {
+    display: flex
+}
+
+.inr {
+    padding-top: 10px
+}
