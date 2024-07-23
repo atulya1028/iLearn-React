@@ -6,7 +6,7 @@
 .flex-display {
   display: flex;
   gap: 20px;
-  justify-content: flex-flex-start;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -20,6 +20,6 @@
 .data{
     display: flex;
     flex-direction: row;
-    justify-content: flex-flex-start;
+    justify-content: flex-start;
     gap: 50px;
 }

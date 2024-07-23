@@ -60,18 +60,10 @@ body{
 
 
 .head{
-/*   width:  100%;
-  height: 80px;
-  display: flex;
-  padding-left: 0px;
-  padding-right: 20px;
-  gap: 20px;
-  flex-direction: row;
-  align-items: center; */
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center !important;
 }
 
 @media screen and (min-width:360px) {
@@ -130,7 +122,6 @@ body{
 @media screen and (min-width:768px) {
   .head{
       display: flex !important;
-      flex-direction: row !important;
       justify-content: space-between !important;
       align-items: center !important;
     }
@@ -144,6 +135,14 @@ body{
     }
 }
 @media screen and (min-width:915px) {
+  .head{
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+    }
+}
+@media screen and (min-width:1440px) {
   .head{
       display: flex !important;
       flex-direction: row !important;
@@ -192,8 +191,8 @@ body{
     padding-bottom: 20px;
     border-radius: 10px;
     display: flex;
-    align-items: flex-flex-start;
-    justify-content: flex-flex-start;
+    align-items: flex-start;
+    justify-content: flex-start;
     margin-left: -4px;
     margin-right: 20px;
     gap: 20px;
@@ -327,7 +326,7 @@ body{
 }
 @media screen and (min-width:768px) {
   .search-box{
-    margin-left: 200px !important;
+    margin-left: 0px !important;
     width: 50% !important;
     display: inline-flex !important;
     height: 50px !important;
@@ -467,6 +466,12 @@ body{
     margin-top: 25px;
   }
 }
+@media screen and (min-width:768px) {
+  .search{
+    margin-left: 10px !important;
+    margin-top: 2px;
+  }
+}
 @media screen and (min-width:820px) {
   .search{
     margin-left: 10px !important;
@@ -514,7 +519,7 @@ body{
 @media screen and (min-width:375px){
   .fav{
     margin-left: 50px !important;
-    margin-right: 30px !important;
+    margin-right: 20px !important;
     width: 30px !important;
     height: 20px !important;
     color: black !important;
@@ -525,6 +530,16 @@ body{
 @media screen and (min-width:360px){
   .fav{
     margin-top: 30px !important;
+    margin-left: 50px !important;
+    margin-right: 30px !important;
+    width: 30px !important;
+    height: 30px !important;
+    color: black !important;
+    margin-top: 25px !important;
+  }
+}
+@media screen and (min-width:375px){
+  .fav{
     margin-left: 50px !important;
     margin-right: 30px !important;
     width: 30px !important;
@@ -585,24 +600,14 @@ body{
 
 @media screen and (min-width:375px) {
   .bag{
-    width: 20px !important;
+    width: 30px !important;
     height: 30px !important;
     margin-top: 17px !important;
     color: black !important;
-    margin-right: 30px !important;
+    margin-right: 20px !important;
   }
 }
 
-@media screen and (min-width:360px) {
-  .bag{
-    margin-top: 30px;
-    width: 20px !important;
-    height: 30px !important;
-    margin-top: 17px !important;
-    color: black !important;
-    margin-right: 30px !important;
-  }
-}
 @media screen and (min-width:414px) {
   .bag{
     width: 30px !important;
@@ -697,8 +702,8 @@ body{
 @media screen and (min-width:344px) {
   .cart-items-count {
     position: absolute !important;
-    top: 42px !important;
-    right: 24px !important;
+    top: 44px !important;
+    right: 29px !important;
     background-color: red !important;
     color: white !important;
     font-size: 12px !important;
@@ -726,7 +731,7 @@ body{
   .cart-items-count {
     position: absolute !important;
     top: 44px !important;
-    right: 24px !important;
+    right: 18px !important;
     background-color: red !important;
     color: white !important;
     font-size: 12px !important;
@@ -739,7 +744,7 @@ body{
   .cart-items-count {
     position: absolute !important;
     top: 43px !important;
-    right: 24px !important;
+    right: 18px !important;
     background-color: red !important;
     color: white !important;
     font-size: 12px !important;
@@ -753,7 +758,7 @@ body{
   .cart-items-count {
     position: absolute !important;
     top: 43px !important;
-    right: 25px !important;
+    right: 20px !important;
     background-color: red !important;
     color: white !important;
     font-size: 12px !important;
@@ -782,7 +787,7 @@ body{
   .cart-items-count {
     position: absolute !important;
     top: 44px !important;
-    right: 24px !important;
+    right: 28px !important;
     background-color: red !important;
     color: white !important;
     font-size: 12px !important;
@@ -794,8 +799,8 @@ body{
 @media screen and (min-width:768px) {
   .cart-items-count {
     position: absolute !important;
-    top: 45px !important;
-    right: 25px !important;
+    top: 112px !important;
+    right: 30px !important;
     background-color: red !important;
     color: white !important;
     font-size: 12px !important;
@@ -909,7 +914,7 @@ body{
 @media screen and (min-width:412px){
   .favorite-count {
     position: absolute !important;
-    top: 46px !important;
+    top: 42px !important;
     right: 75px !important;
     background-color: red !important;
     color: white !important;
@@ -950,8 +955,8 @@ body{
 @media screen and (min-width:768px){
   .favorite-count {
     position: absolute !important;
-    top: 48px !important;
-    right: 81px !important;
+    top: 109px !important;
+    right: 86px !important;
     background-color: red !important;
     color: white !important;
     font-size: 12px !important;
@@ -1060,12 +1065,11 @@ body{
 }
 
 .heading {
-  display: flex;
+  display: flex !important; 
   justify-content: space-between !important;
-  font-family: 'Montserrat';
-  display: flex;
-  align-items: center;
-  padding: 20px;
+  font-family: 'Montserrat' !important;
+  display: flex !important;
+  padding: 20px !important;
 }
 
 .view{
@@ -1109,7 +1113,7 @@ body{
   list-style: none !important;
   flex-wrap: wrap !important;
   gap: 100px !important; 
-  justify-content: flex-flex-start !important;
+  justify-content: flex-start !important;
   align-items: center !important;
   padding-left: 20px !important;
   padding-right: 30px !important;
@@ -1123,8 +1127,8 @@ body{
     display: flex !important;
     list-style: none !important;
     flex-wrap: wrap !important;
-    gap: 132px !important;
-    justify-content: flex-flex-start !important;
+    gap: 58px !important;
+    justify-content: flex-start !important;
     align-items: center !important;
     padding-left: 20px !important;
     padding-right: 30px !important; 
@@ -1139,8 +1143,8 @@ body{
     display: flex !important;
     list-style: none !important;
     flex-wrap: wrap !important;
-    gap: 150px !important;
-    justify-content: flex-flex-start !important;
+    gap: 34px !important;
+    justify-content: flex-start !important;
     align-items: center !important;
     padding-left: 20px !important;
     padding-right: 30px !important; 
@@ -1154,8 +1158,8 @@ body{
     display: flex !important;
     list-style: none !important;
     flex-wrap: wrap !important;
-    gap: 150px !important;
-    justify-content: flex-flex-start !important;
+    gap: 40px !important;
+    justify-content: flex-start !important;
     align-items: center !important;
     padding-left: 20px !important;
     padding-right: 30px !important; 
@@ -1170,7 +1174,7 @@ body{
     list-style: none !important;
     flex-wrap: wrap !important;
     gap: 35px !important;
-    justify-content: flex-flex-start !important;
+    justify-content: flex-start !important;
     align-items: center !important;
     padding-left: 20px !important;
     padding-right: 30px !important; 
@@ -1185,7 +1189,7 @@ body{
     list-style: none !important;
     flex-wrap: wrap !important;
     gap: 56px !important;
-    justify-content: flex-flex-start !important;
+    justify-content: flex-start !important;
     align-items: center !important;
     padding-left: 20px !important;
     padding-right: 30px !important; 
@@ -1200,7 +1204,7 @@ body{
     list-style: none !important;
     flex-wrap: wrap !important;
     gap: 76px !important;
-    justify-content: flex-flex-start !important;
+    justify-content: flex-start !important;
     align-items: center !important;
     padding-left: 20px !important;
     padding-right: 30px !important; 
@@ -1215,7 +1219,7 @@ body{
     list-style: none !important;
     flex-wrap: wrap !important;
     gap: 78px !important;
-    justify-content: flex-flex-start !important;
+    justify-content: flex-start !important;
     align-items: center !important;
     padding-left: 20px !important;
     padding-right: 30px !important; 
@@ -1231,7 +1235,7 @@ body{
     list-style: none !important;
     flex-wrap: wrap !important;
     gap: 82px !important;
-    justify-content: flex-flex-start !important;
+    justify-content: flex-start !important;
     align-items: center !important;
     padding-left: 20px !important;
     padding-right: 30px !important; 
@@ -1245,10 +1249,10 @@ body{
     display: flex !important;
     list-style: none !important;
     flex-wrap: wrap !important;
-    gap: 150px !important;
-    justify-content: flex-flex-start !important;
+    gap: 25px !important;
+    justify-content: flex-start !important;
     align-items: center !important;
-    padding-left: 60px !important;
+    padding-left: 32px !important;
     padding-right: 30px !important; 
     text-decoration: none !important;
     padding-bottom: 50px !important;
@@ -1260,8 +1264,8 @@ body{
     display: flex !important;
     list-style: none !important;
     flex-wrap: wrap !important;
-    gap: 136px !important;
-    justify-content: flex-flex-start !important;
+    gap: 49px !important;
+    justify-content: flex-start !important;
     align-items: center !important;
     padding-left: 20px !important;
     padding-right: 30px !important; 
@@ -1275,8 +1279,8 @@ body{
     display: flex !important;
     list-style: none !important;
     flex-wrap: wrap !important;
-    gap: 152px !important;
-    justify-content: flex-flex-start !important;
+    gap: 66px !important;
+    justify-content: flex-start !important;
     align-items: center !important;
     padding-left: 20px !important;
     padding-right: 30px !important; 
@@ -1289,8 +1293,8 @@ body{
     display: flex !important;
     list-style: none !important;
     flex-wrap: wrap !important;
-    gap: 178px !important;
-    justify-content: flex-flex-start !important;
+    gap: 77px !important;
+    justify-content: flex-start !important;
     align-items: center !important;
     padding-left: 20px !important;
     padding-right: 30px !important; 
@@ -1304,8 +1308,8 @@ body{
     display: flex !important;
     list-style: none !important;
     flex-wrap: wrap !important;
-    gap: 176px !important;
-    justify-content: flex-flex-start !important;
+    gap: 92px !important;
+    justify-content: flex-start !important;
     align-items: center !important;
     padding-left: 30px !important;
     padding-right: 30px !important; 
@@ -1319,8 +1323,8 @@ body{
     display: flex !important;
     list-style: none !important;
     flex-wrap: wrap !important;
-    gap: 241px !important;
-    justify-content: flex-flex-start !important;
+    gap: 62px !important;
+    justify-content: flex-start !important;
     align-items: center !important;
     padding-left: 30px !important;
     padding-right: 30px !important; 
@@ -1334,8 +1338,8 @@ body{
     display: flex !important;
     list-style: none !important;
     flex-wrap: wrap !important;
-    gap: 194px !important;
-    justify-content: flex-flex-start !important;
+    gap: 100px !important;
+    justify-content: flex-start !important;
     align-items: center !important;
     padding-left: 50px !important;
     padding-right: 30px !important; 
@@ -1349,8 +1353,8 @@ body{
     display: flex !important;
     list-style: none !important;
     flex-wrap: wrap !important;
-    gap: 250px !important;
-    justify-content: flex-flex-start !important;
+    gap: 100px !important;
+    justify-content: flex-start !important;
     align-items: center !important;
     padding-left: 50px !important;
     padding-right: 50px !important; 
@@ -1367,7 +1371,7 @@ body{
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
-  align-items: flex-flex-start !important;
+  align-items: flex-start !important;
   font-size: 14px !important;
   font-weight: normal !important;
 }
@@ -1379,7 +1383,31 @@ body{
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
-    align-items: flex-flex-start !important;
+    align-items: flex-start !important;
+    font-size: 14px !important;
+    font-weight: normal !important;
+  }
+}
+@media screen and (min-width:320px) {
+  .box-card{
+    width: 100px !important;
+    height: 300px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    font-size: 14px !important;
+    font-weight: normal !important;
+  }
+}
+@media screen and (min-width:344px) {
+  .box-card{
+    width: 100px !important;
+    height: 300px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
     font-size: 14px !important;
     font-weight: normal !important;
   }
@@ -1394,7 +1422,7 @@ body{
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
-    align-items: flex-flex-start !important;
+    align-items: flex-start !important;
     font-size: 14px !important;
     font-weight: normal !important;
   }
@@ -1410,7 +1438,7 @@ body{
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
-    align-items: flex-flex-start !important;
+    align-items: flex-start !important;
     font-size: 14px !important;
     font-weight: normal !important;
   }
@@ -1425,7 +1453,7 @@ body{
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
-    align-items: flex-flex-start !important;
+    align-items: flex-start !important;
     font-size: 14px !important;
     font-weight: normal !important;
   }
@@ -1434,19 +1462,40 @@ body{
   .box-card{
     border: 1px solid transparent !important;
     padding: 5px !important;
-    border: 1px solid transparent;
     width: 140px !important;
     height: 280px !important;
     display: flex;
     flex-direction: column !important;
     justify-content: space-between !important;
-    align-items: flex-flex-start !important;
+    align-items: flex-start !important;
+    font-size: 14px !important;
+    font-weight: normal !important;
+  }
+}
+@media screen and (min-width:1440px) {
+  .box-card{
+    border: 1px solid transparent !important;
+    padding: 5px !important;
+    width: 140px !important;
+    height: 280px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
     font-size: 14px !important;
     font-weight: normal !important;
   }
 }
 
+.box-card:hover{
+  box-shadow: 10px 10px 10px white;
+}
 
+@media screen and (min-width:1440px) {
+  .box-card:hover{
+    box-shadow: 10px 10px 10px white;
+  }
+}
 
 .text-hover:hover{
   font-weight: bold;
@@ -1460,7 +1509,14 @@ body{
 
 @media screen and (min-width:320px) {
   .card-image{
-  width: 73px !important;
+  width: 112px !important;
+  height: 150px !important;
+  font-family: 'Montserrat' !important;
+}
+}
+@media screen and (min-width:344px) {
+  .card-image{
+  width: 125px !important;
   height: 150px !important;
   font-family: 'Montserrat' !important;
 }

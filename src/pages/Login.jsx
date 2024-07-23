@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import '../styles/Login.css';
 export const Login = () => {
   const navigate = useNavigate();
@@ -53,17 +53,6 @@ export const Login = () => {
     }
   };
 
-  useEffect(() => {
-
-    handleScreenWidth();
-    window.addEventListener("resize", handleScreenWidth);
-
-    return () => {
-      window.removeEventListener("resize", handleScreenWidth);
-    }
-   
-  }, []);
-
   return (
     <div className="login">
       <ToastContainer />
@@ -104,55 +93,9 @@ export const Login = () => {
             </button>
             {errorMessage && <p className="error-message">{errorMessage}</p>}
         </div>
+        <Link to='/forgot-password' className="forgot-pass">Forgot Password?</Link>
+        <br />
+        <Link to='/sign-up' className="sign-up">Don't have account? Please register</Link>
     </div>
   );
 };
-
-/* screenWidth ? (
-        <div
-          style={{  
-            marginTop: "100px",
-            width: "80%",
-            marginLeft: "30px",
-            marginRight: "30px",
-            borderRadius: '20px',
-            padding: '20px',
-            border:'1px solid black'
-          }}
-        >
-          <h3 className="login-heading">
-            Welcome to iLearn <br />
-            Your book online book store
-          </h3>
-          <input
-            type="text"
-            placeholder="Enter email"
-            value={email}
-            onChange={handleEmailChange}
-            className="email"
-          />
-          <br />
-          <br />
-          <span className="password-container">
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Enter Password"
-              value={password}
-              onChange={handlePasswordChange}
-              className="pass"
-            />
-            <button className="showHideBtn" onClick={togglePasswordVisibility}>
-              {showPassword ? (
-                <FontAwesomeIcon icon={faEyeSlash} />
-              ) : (
-                <FontAwesomeIcon icon={faEye} />
-              )}
-            </button>
-          </span>
-          <br /> <br />
-          <button className="sign-in" onClick={handleSignIn}>
-            SignIn
-          </button>
-          {errorMessage && <p>{errorMessage}</p>}
-        </div>
-      )  */

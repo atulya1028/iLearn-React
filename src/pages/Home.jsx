@@ -7,7 +7,7 @@ import favorite from "../images/favorite.png";
 import favoriteFill from "../images/favorite-fill.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../App.css";
+import "../styles/Home.css";
 
 export default function Home() {
   const [booksData, setBooksData] = useState([]);
@@ -20,16 +20,20 @@ export default function Home() {
     const fetchFavorites = async () => {
       const token = localStorage.getItem("token");
       try {
-        const response = await fetch("http://localhost:8080/api/book/favorites", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(
+          "http://localhost:8080/api/book/favorites",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch favorites");
         }
         const data = await response.json();
         setFavorites(data.favorites.map((fav) => fav._id));
+        console.log("Token: ", token);
       } catch (error) {
         console.error("Error fetching favorites:", error);
       }
@@ -176,11 +180,7 @@ export default function Home() {
             ) : (
               <button className="special-button">
                 Special for you{" "}
-                <FontAwesomeIcon
-                  icon={faCircleRight}
-                  size="sm"
-                  color="green"
-                />
+                <FontAwesomeIcon icon={faCircleRight} size="sm" color="green" />
               </button>
             )}
           </div>
@@ -190,7 +190,7 @@ export default function Home() {
             <></>
           )}
         </div>
-        <div className="heading">
+        <div className="head-view">
           <h4>Best Selling Books</h4>
           <div onClick={toggleShowMore} className="view">
             {showMore ? "View Less" : "View More"}
@@ -202,7 +202,7 @@ export default function Home() {
           <ul className="book-list">
             {booksData.map((book) => (
               <li key={book._id}>
-                <div className="box-card" style={{ paddingTop: "10px" }}>
+                <div className="box-card">
                   <img
                     src={`http://localhost:8080/${book.image}`}
                     alt={book.title}
@@ -211,62 +211,70 @@ export default function Home() {
                   <div>{book.title}</div>
                   <div>{book.author}</div>
                   <div>₹{book.price}</div>
-                  <span style={{ display: "flex", gap: "10px" }}>
-                    <Link to={`/details/${book.title}`} className="card-text">
-                      <button className="add-cart">
-                        ADD TO CART
-                      </button>
-                    </Link>
-                    <img
-                      src={isFavorite(book._id) ? favoriteFill : favorite}
-                      alt="Favorite"
-                      className="favorite-icon"
-                      onClick={() =>
-                        isFavorite(book._id)
-                          ? handleRemoveFavorite(book._id)
-                          : handleFavorite(book._id)
-                      }
-                      width={20}
-                      height={20}
-                    />
-                  </span>
                 </div>
+                <span style={{ display: "flex", gap: "10px",paddingTop:'10px'}}>
+                  <Link to={`/details/${book.title}`} className="card-text">
+                    <button className="add-cart">ADD TO CART</button>
+                  </Link>
+                  <img
+                    src={isFavorite(book._id) ? favoriteFill : favorite}
+                    alt="Favorite"
+                    className="favorite-icon"
+                    onClick={() =>
+                      isFavorite(book._id)
+                        ? handleRemoveFavorite(book._id)
+                        : handleFavorite(book._id)
+                    }
+                    width={20}
+                    height={20}
+                  />
+                </span>
               </li>
             ))}
           </ul>
         ) : (
           <ul className="book-list">
-            {booksData.slice(0, 4).map((book) => (
+            {booksData.slice(0, 6).map((book) => (
               <li key={book._id}>
-                <div className="box-card">
-                  <img
-                    src={`http://localhost:8080/${book.image}`}
-                    alt={book.title}
-                    className="card-image"
-                  />
-                  <div className="text-hover card-text">{book.title}</div>
-                  <div className="text-hover">{book.author}</div>
-                  <div className="text-hover">₹{book.price}</div>
-                  <span style={{ display: "flex",
-                  gap:'10px',
-                  justifyContent:'space-evenly',alignContent:'center' }}>
-                    <Link to={`/details/${book.title}`} >
-                      <button className="add-cart">ADD TO CART</button>
-                    </Link>
+                <Link
+                  to={`/details/${book.title}`}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <div className="box-card">
                     <img
-                      src={isFavorite(book._id) ? favoriteFill : favorite}
-                      alt="Favorite"
-                      className="favorite-icon"
-                      onClick={() =>
-                        isFavorite(book._id)
-                          ? handleRemoveFavorite(book._id)
-                          : handleFavorite(book._id)
-                      }
-                      width={20}
-                      height={20}
+                      src={`http://localhost:8080/${book.image}`}
+                      alt={book.title}
+                      className="card-image"
                     />
-                  </span>
-                </div>
+                    <div className="text-hover card-text">{book.title}</div>
+                    <div className="text-hover">{book.author}</div>
+                    <div className="text-hover">₹{book.price}</div>
+                  </div>
+                </Link>
+                <span
+                  style={{
+                    display: "flex",
+                    gap: "10px",
+                    justifyContent: "space-evenly",
+                    alignContent: "center",
+                  }}
+                >
+                  <Link to={`/details/${book.title}`}>
+                    <button className="add-cart">ADD TO CART</button>
+                  </Link>
+                  <img
+                    src={isFavorite(book._id) ? favoriteFill : favorite}
+                    alt="Favorite"
+                    className="favorite-icon"
+                    onClick={() =>
+                      isFavorite(book._id)
+                        ? handleRemoveFavorite(book._id)
+                        : handleFavorite(book._id)
+                    }
+                    width={20}
+                    height={20}
+                  />
+                </span>
               </li>
             ))}
           </ul>

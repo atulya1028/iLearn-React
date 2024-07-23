@@ -15,8 +15,8 @@ export const Footer = () => {
         <div
           style={{
             display: "flex",
-            alignItems: "flex-flex-start",
-            justifyContent: "flex-flex-start",
+            alignItems: "flex-start",
+            justifyContent: "flex-start",
             textAlign: "flex-start",
             color: "black",
           }}

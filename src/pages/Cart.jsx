@@ -4,11 +4,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import emptyBox from "../images/empty-box.png";
 import { useNavigate } from "react-router-dom";
+import '../styles/Cart.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Cart = () => {
-  const [cart, setCart] = useState(null);
+  const [cart, setCart] = useState([]);
   const [deliveryInstructions, setDeliveryInstructions] = useState("");
+  const profileToken = localStorage.getItem('token');
   const navigate = useNavigate();
+
   useEffect(() => {
     const getCartItems = async () => {
       try {
@@ -25,7 +30,7 @@ const Cart = () => {
         }
 
         const data = await response.json();
-        setCart(data.cartItems);
+        setCart(data.cartItems || []);
         setDeliveryInstructions(data.deliveryInstructions || "");
       } catch (error) {
         console.error("Error fetching cart data:", error.message);
@@ -57,7 +62,7 @@ const Cart = () => {
       }
 
       const updatedCart = await response.json();
-      setCart(updatedCart.cartItems);
+      setCart(updatedCart.cartItems || []);
     } catch (error) {
       console.error("Error updating quantity:", error.message);
     }
@@ -66,11 +71,6 @@ const Cart = () => {
 
   const handleCheckout = async () => {
     try {
-      if (!deliveryInstructions.trim()) {
-        console.error("Delivery instructions are empty.");
-        return; // Don't proceed if delivery instructions are empty
-      }
-  
       const token = localStorage.getItem("token");
       const response = await fetch("http://localhost:8080/api/cart/proceed-to-checkout", {
         method: "POST",
@@ -80,11 +80,11 @@ const Cart = () => {
         },
         body: JSON.stringify({ deliveryInstructions }), // Ensure deliveryInstructions is included
       });
-  
+
       if (!response.ok) {
         throw new Error("Failed to checkout");
       }
-  
+
       const data = await response.json();
       console.log(data);
       navigate('/create-order');
@@ -92,8 +92,7 @@ const Cart = () => {
       console.error("Error during checkout:", error.message);
     }
   };
-  
-  
+
   const handleDeleteItem = async (itemId) => {
     try {
       const token = localStorage.getItem("token");
@@ -106,27 +105,36 @@ const Cart = () => {
           },
         }
       );
-  
+
       if (!response.ok) {
         throw new Error("Failed to delete item");
       }
-  
+
       const updatedCart = await response.json();
-      setCart(updatedCart.cartItems);
+      setCart(updatedCart.cartItems || []);
     } catch (error) {
       console.error("Error deleting item:", error.message);
     }
     window.location.reload();
   };
-  
+
+  const handleCart = () => {
+    if (profileToken == null) {
+      toast.error("Please sign in");
+      console.log("Please sign in");
+    } else {
+      handleCheckout();
+    }
+  };
 
   return (
     <>
+      <ToastContainer />
       <h4 className="heading">My Bag</h4>
       <div className="cart">
         <div className="main">
           <div className="block1">
-            {cart &&
+            {cart.length > 0 ? (
               cart.map((item) => (
                 <div className="details" key={item._id}>
                   <div className="items">
@@ -160,68 +168,70 @@ const Cart = () => {
                       <span
                         style={{
                           display: "flex",
-                          justifyContent: "flex-flex-start",
+                          justifyContent: "flex-start",
                           gap: "10px",
                         }}
                       >
                         <h6>₹ {item.price * item.quantity}</h6>
-                        <FontAwesomeIcon icon={faTrash} size="1x" onClick={()=> handleDeleteItem(item._id)}/>
+                        <FontAwesomeIcon icon={faTrash} size="1x" onClick={() => handleDeleteItem(item._id)} />
                       </span>
                     </span>
                   </div>
                 </div>
-              ))}
+              ))
+            ) : (
+              <img src={emptyBox} className="empty-box" alt="Empty Cart" />
+            )}
           </div>
-         {cart && cart.length === 0 ? <></> :  
-         <div className="order">
-            <h5>OrderSummary</h5>
-            <div className="order-details">
-              <h5>Amount Payable:</h5>
-              <h5>
-                ₹{" "}
-                {cart
-                  ? cart.reduce(
-                      (total, item) => total + item.price * item.quantity,
-                      0
-                    )
-                  : 0}
-              </h5>
+          {cart.length > 0 && (
+            <div className="order">
+              <h5>Order Summary</h5>
+              <div className="order-details">
+                <h5>Amount Payable:</h5>
+                <h5>
+                  ₹{" "}
+                  {cart.reduce(
+                    (total, item) => total + item.price * item.quantity,
+                    0
+                  )}
+                </h5>
+              </div>
+              <div className="order-details">
+                <h5>(includes GST)</h5>
+              </div>
+              <hr />
+              <div className="order-details">
+                <h5>Delivery instructions</h5>
+              </div>
+              <textarea
+                name="deliveryInstructions"
+                id="deliveryInstructions"
+                cols="30"
+                rows="7"
+                style={{
+                  width: "100%",
+                  border: "1px solid black",
+                  borderRadius: "5px",
+                }}
+                value={deliveryInstructions}
+                onChange={(e) => setDeliveryInstructions(e.target.value)}
+              ></textarea>
+              <button
+                style={{
+                  width: "100%",
+                  height: "40px",
+                  backgroundColor: "black",
+                  color: "white",
+                  border: "none",
+                  marginTop: '10px'
+                }}
+                onClick={handleCart}
+              >
+                Proceed To Checkout
+              </button>
             </div>
-            <div className="order-details">
-              <h5>(include GST)</h5>
-            </div>
-            <hr />
-            <div className="order-details">
-              <h5>Delivery instructions</h5>
-            </div>
-            <textarea
-              name="deliveryInstructions"
-              id="deliveryInstructions"
-              cols="30"
-              rows="7"
-              style={{
-                width: "100%",
-                border: "1px solid black",
-                borderRadius: "5px",
-              }}
-              value={deliveryInstructions}
-              onChange={(e) => setDeliveryInstructions(e.target.value)}
-            ></textarea>
-            <button
-              style={{
-                width: "100%",
-                height: "40px",
-                backgroundColor: "black",
-                color: "white",
-                border: "none",
-              }}
-              onClick={handleCheckout}
-            >
-              Proceed To Checkout
-            </button>
-          </div>}
+          )}
         </div>
-        {!cart && <img src={emptyBox} className="empty-box" alt="Empty Cart" />}
       </div>
     </>
   );

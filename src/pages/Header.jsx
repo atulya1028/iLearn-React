@@ -6,15 +6,16 @@ import { faBars, faUserCircle, faHeart, faSearch } from "@fortawesome/free-solid
 import SideBars from "./SideBars";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
 import "../App.css";
+import '../styles/Header.css';
 
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 576 || window.innerWidth <=768 );
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 576 );
   const [userProfile, setUserProfile] = useState(null);
   const [viewProfile, setViewProfile] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
   const [cartItemsCount, setCartItemsCount] = useState(0);
   const [favoriteCount, setFavoriteCount] = useState(0);
 
@@ -192,7 +193,7 @@ const Header = () => {
                 borderRadius: "5px",
               }}
             />
-            <img src={logo} width={50} height={100} alt="logo"/></span>
+            <img src={logo} alt="logo" className="logo-img"/></span>
             <span><Link to='/favorite'> <FontAwesomeIcon icon={faHeart} className="fav" /></Link>
              <span className="favorite-count">{favoriteCount}</span>
              <Link to='/cart'>
@@ -208,7 +209,7 @@ const Header = () => {
             handleLogout={handleLogout}
           />
         </header>
-        <span>
+        <span className="search">
         <input
             className="search-box"
             type="text"
@@ -224,7 +225,7 @@ const Header = () => {
         <header className="head">
           <Link to="/">
             {" "}
-            <img src={logo} width="280px" height="150px" alt="iLearn" />
+            <img src={logo} width="220px" height="150px" alt="iLearn" />
           </Link>
           <input
             className="search-box"
@@ -255,7 +256,7 @@ const Header = () => {
               <FontAwesomeIcon
                 icon={faUserCircle}
                 className="user-circle"
-                onClick={handleProfile}
+               onClick={handleProfile}
                 style={{ cursor: "pointer" }}
               />
               {viewProfile ? (
